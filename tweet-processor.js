@@ -130,9 +130,10 @@ async function updateGoogleSheet(tweets, spreadsheetId) {
 }
 // Get variables from .env
 const GPT_API_KEY = process.env.GPT_API_KEY;
-const GPT_API_URL = process.env.GPT_API_URL;
+const GPT_API_URL = "https://api.openai.com/v1/completions"; // Replace with your GPT endpoint
 const DEFAULT_PROMPT =
-  process.env.PROMPT || "Default content for tweet generation";
+  process.env.PROMPT ||
+  "Please generate 108 spritual tweets using the contest content provided";
 
 if (!GPT_API_KEY || !GPT_API_URL) {
   console.error("Error: GPT_API_KEY and GPT_API_URL must be set in .env");

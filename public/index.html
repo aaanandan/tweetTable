@@ -7,11 +7,11 @@
   </head>
   <body>
     <h1>
-      This application reads 108 tweets from the file shared, makes a table
-      format, and adds a sheet in digiMahanth sheet
+      This application reads tweets from a file or text input, makes a table
+      format, and adds a sheet in the digiMahanth sheet
     </h1>
     <h2>
-      Select a file which has today's tweets. Example:
+      Select a file with today's tweets. Example:
       <a href="https://tweettable.onrender.com/tweet.txt">tweets.txt</a>
     </h2>
     <a
@@ -20,7 +20,16 @@
       <h2>digiMahanth sheet</h2>
     </a>
 
-    <!-- New Textarea to Copy/Paste Tweets -->
+    <!-- File Upload Section -->
+    <h3>Upload Tweets from a File</h3>
+    <form id="uploadFileForm" enctype="multipart/form-data">
+      <input type="file" name="file" id="file" required />
+      <button type="submit">Upload File</button>
+    </form>
+
+    <hr />
+
+    <!-- Textarea Input Section -->
     <h3>Paste Tweets Below</h3>
     <textarea
       id="tweetsTextarea"
@@ -29,16 +38,47 @@
       placeholder="Paste your tweets here..."
     ></textarea
     ><br /><br />
-    <button id="uploadButton">Upload Tweets</button>
+    <button id="uploadButton">Upload Tweets from Textarea</button>
 
     <h3 id="status"></h3>
 
     <script>
+      // Upload file handler
+      document
+        .getElementById("uploadFileForm")
+        .addEventListener("submit", async (event) => {
+          event.preventDefault();
+
+          const statusElement = document.getElementById("status");
+          statusElement.textContent = "Processing file...";
+
+          const formData = new FormData();
+          formData.append("file", document.getElementById("file").files[0]);
+
+          try {
+            const response = await fetch("/upload", {
+              method: "POST",
+              body: formData,
+            });
+
+            const result = await response.json();
+            if (result.success) {
+              statusElement.textContent =
+                "File uploaded and processed successfully!";
+            } else {
+              statusElement.textContent = `Error: ${result.message}`;
+            }
+          } catch (error) {
+            statusElement.textContent = `Error: ${error.message}`;
+          }
+        });
+
+      // Upload tweets from textarea handler
       document
         .getElementById("uploadButton")
         .addEventListener("click", async () => {
           const statusElement = document.getElementById("status");
-          statusElement.textContent = "Processing file...";
+          statusElement.textContent = "Processing text...";
 
           const tweetsText = document.getElementById("tweetsTextarea").value;
           if (!tweetsText.trim()) {
@@ -46,7 +86,7 @@
             return;
           }
 
-          // Create a Blob from the text and simulate a file upload
+          // Create a Blob from the textarea text and simulate a file upload
           const file = new Blob([tweetsText], { type: "text/plain" });
           const formData = new FormData();
           formData.append("file", file, "tweets.txt"); // Set filename to 'tweets.txt'
@@ -60,7 +100,7 @@
             const result = await response.json();
             if (result.success) {
               statusElement.textContent =
-                "File uploaded and processed successfully!";
+                "Tweets uploaded and processed successfully!";
             } else {
               statusElement.textContent = `Error: ${result.message}`;
             }

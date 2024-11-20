@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Tweets to Google Sheet</title>
+</head>
+<body>
+    <h1>Upload Tweets</h1>
+    <form id="uploadForm" enctype="multipart/form-data">
+        <input type="file" name="file" id="file" required />
+        <button type="submit">Upload</button>
+    </form>
+
+    <h3 id="status"></h3>
+    
+    <script>
+        document.getElementById('uploadForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const statusElement = document.getElementById('status');
+            statusElement.textContent = 'Processing file...';
+
+            const formData = new FormData();
+            formData.append('file', document.getElementById('file').files[0]);
+
+            try {
+                const response = await fetch('/upload', {
+                    method: 'POST',
+                    body: formData,
+                });
+
+                const result = await response.json();
+                if (result.success) {
+                    statusElement.textContent = 'File uploaded and processed successfully!';
+                } else {
+                    statusElement.textContent = `Error: ${result.message}`;
+                }
+            } catch (error) {
+                statusElement.textContent = `Error: ${error.message}`;
+            }
+        });
+    </script>
+</body>
+</html>

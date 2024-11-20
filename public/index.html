@@ -4,21 +4,113 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Upload Tweets to Google Sheet</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        margin: 0;
+        font-family: "Montserrat", sans-serif;
+        background-image: url("https://kailaasa.org/wp-content/uploads/2022/01/bg2.jpg");
+        background-size: cover;
+        background-attachment: fixed;
+        color: #fff;
+        text-align: center;
+      }
+      header {
+        background-color: rgba(0, 0, 0, 0.8);
+        padding: 20px;
+      }
+      header img {
+        width: 150px;
+      }
+      h1,
+      h2,
+      h3 {
+        margin: 20px 0;
+      }
+      h1 {
+        font-size: 2.5em;
+        font-weight: 600;
+      }
+      h2 {
+        font-size: 1.8em;
+        font-weight: 400;
+      }
+      h3 {
+        font-size: 1.4em;
+        font-weight: 400;
+      }
+      form,
+      textarea,
+      button,
+      a {
+        margin-top: 20px;
+        display: inline-block;
+        width: 80%;
+      }
+      textarea {
+        padding: 15px;
+        font-size: 1.1em;
+        border-radius: 10px;
+        border: none;
+        background-color: rgba(255, 255, 255, 0.8);
+        color: #000;
+        resize: none;
+      }
+      button {
+        padding: 15px 30px;
+        font-size: 1.1em;
+        font-weight: 600;
+        color: #fff;
+        background-color: #fc6203;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #ff7a26;
+      }
+      a {
+        color: #fc6203;
+        text-decoration: none;
+        font-size: 1.1em;
+      }
+      a:hover {
+        color: #ff7a26;
+      }
+      hr {
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        margin: 40px 0;
+      }
+      #status {
+        font-size: 1.2em;
+        margin-top: 20px;
+      }
+    </style>
   </head>
   <body>
-    <h1>
-      This application reads tweets from a file or text input, makes a table
-      format, and adds a sheet in the digiMahanth sheet
-    </h1>
+    <header>
+      <img
+        src="https://kailaasa.org/wp-content/uploads/2022/01/kailaasa-logo.png"
+        alt="Kailaasa Logo"
+      />
+    </header>
+
+    <h1>Upload and Process Tweets</h1>
+    <h2>Select a file with today's tweets or paste tweets directly below.</h2>
     <h2>
-      Select a file with today's tweets. Example:
+      Example file:
       <a href="https://tweettable.onrender.com/tweet.txt">tweets.txt</a>
     </h2>
-    <a
-      href="https://docs.google.com/spreadsheets/d/1vP5u0XYnbI5tcAIkmrr3PG4MeZ5bl-xdIIp-S62tD7Y/edit?gid=1251501015#gid=1251501015"
-    >
-      <h2>digiMahanth sheet</h2>
-    </a>
+    <h2>
+      Access the sheet here:
+      <a
+        href="https://docs.google.com/spreadsheets/d/1vP5u0XYnbI5tcAIkmrr3PG4MeZ5bl-xdIIp-S62tD7Y/edit?gid=1251501015#gid=1251501015"
+        >digiMahanth Sheet</a
+      >
+    </h2>
 
     <!-- File Upload Section -->
     <h3>Upload Tweets from a File</h3>
@@ -33,11 +125,10 @@
     <h3>Paste Tweets Below</h3>
     <textarea
       id="tweetsTextarea"
-      rows="20"
-      cols="100"
+      rows="15"
       placeholder="Paste your tweets here..."
     ></textarea
-    ><br /><br />
+    ><br />
     <button id="uploadButton">Upload Tweets from Textarea</button>
 
     <h3 id="status"></h3>

@@ -1,0 +1,155 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Upload Tweets to Google Sheet</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        margin: 0;
+        font-family: "Montserrat", sans-serif;
+        /* background-image: url("https://kailaasa.org/wp-content/uploads/2023/08/KAILASA-FLAG.png");
+        background-size: contain;
+        background-attachment: fixed; */
+        /* color: #fff; */
+        text-align: center;
+      }
+      header {
+        background-color: rgba(0, 0, 0, 0.8);
+        padding: 20px;
+      }
+      header img {
+        width: 150px;
+      }
+
+      footer {
+        /* background-color: rgba(0, 0, 0, 0.8); */
+        padding: 20px;
+      }
+      footer img {
+        width: 150px;
+        margin: 40px;
+      }
+      h1,
+      h2,
+      h3 {
+        margin: 20px 0;
+      }
+      h1 {
+        font-size: 2.5em;
+        font-weight: 600;
+      }
+      h2 {
+        font-size: 1.8em;
+        font-weight: 400;
+      }
+      h3 {
+        font-size: 1.4em;
+        font-weight: 400;
+      }
+      form,
+      textarea,
+      button,
+      file,
+      a {
+        margin-top: 20px;
+        display: inline-block;
+        width: 80%;
+      }
+      textarea {
+        padding: 15px;
+        font-size: 1.1em;
+        border-radius: 10px;
+        background-color: rgba(255, 255, 255, 0.8);
+        color: #000;
+        resize: none;
+      }
+      button {
+        padding: 15px 30px;
+        font-size: 1.1em;
+        font-weight: 600;
+        color: #fff;
+        background-color: #fc6203;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #ff7a26;
+      }
+      a {
+        color: #fc6203;
+        /* text-decoration: none; */
+        font-size: 1.1em;
+      }
+      a:hover {
+        color: #ff7a26;
+      }
+      hr {
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        margin: 40px 0;
+      }
+      #status {
+        font-size: 1.2em;
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <img
+        src="https://kailaasa.org/wp-content/uploads/2020/07/kailaasa-new-emblem-2019-copy-1.png"
+        alt="Kailaasa Logo"
+      />
+    </header>
+    <div class="container">
+      <h1>Generate Tweets and Responses</h1>
+      <form id="tweetForm" action="/generate-tweets" method="POST">
+        <textarea
+          name="content"
+          id="content"
+          rows="15"
+          placeholder="Enter the content to generate tweets..."
+          required
+        ></textarea>
+        <button type="submit">Generate Tweets File</button>
+      </form>
+      <p class="note">
+        After submission, a file will be generated for download.
+      </p>
+    </div>
+  </body>
+  <footer>
+    <img
+      src="https://kailaasa.org/wp-content/uploads/2023/08/KAILASA-FLAG.png"
+      alt="Kailaasa flag"
+    />
+    <img
+      src="https://kailaasa.org/wp-content/uploads/2023/08/KAILASA-FLAG.png"
+      alt="Kailaasa flag"
+    />
+    <img
+      src="https://kailaasa.org/wp-content/uploads/2023/08/KAILASA-FLAG.png"
+      alt="Kailaasa flag"
+    />
+    <img
+      src="https://kailaasa.org/wp-content/uploads/2023/08/KAILASA-FLAG.png"
+      alt="Kailaasa flag"
+    />
+    <img
+      src="https://kailaasa.org/wp-content/uploads/2023/08/KAILASA-FLAG.png"
+      alt="Kailaasa flag"
+    />
+    <img
+      src="https://kailaasa.org/wp-content/uploads/2023/08/KAILASA-FLAG.png"
+      alt="Kailaasa flag"
+    />
+    <img
+      src="https://kailaasa.org/wp-content/uploads/2023/08/KAILASA-FLAG.png"
+      alt="Kailaasa flag"
+    />
+  </footer>
+</html>

@@ -1,51 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Upload Tweets to Google Sheet</title>
-</head>
-<body>
-    <h1>This application reads  108 tweets from the file shared makes a table format and add a sheet in digiMahanth sheet</h1> <h1>upload Tweets</h1>
-    <h2>Select a file which as todays tweet. ex:  <a href="https://tweettable.onrender.com/tweet.txt">tweets.txt</a></h2>
-    <a 
-    href="https://docs.google.com/spreadsheets/d/1vP5u0XYnbI5tcAIkmrr3PG4MeZ5bl-xdIIp-S62tD7Y/edit?gid=1251501015#gid=1251501015"/>
-    <h2>digiMahanth sheet</h2> 
+  </head>
+  <body>
+    <h1>
+      This application reads 108 tweets from the file shared, makes a table
+      format, and adds a sheet in digiMahanth sheet
+    </h1>
+    <h2>
+      Select a file which has today's tweets. Example:
+      <a href="https://tweettable.onrender.com/tweet.txt">tweets.txt</a>
+    </h2>
+    <a
+      href="https://docs.google.com/spreadsheets/d/1vP5u0XYnbI5tcAIkmrr3PG4MeZ5bl-xdIIp-S62tD7Y/edit?gid=1251501015#gid=1251501015"
+    >
+      <h2>digiMahanth sheet</h2>
     </a>
-</h2>
-    <form id="uploadForm" enctype="multipart/form-data">
-        <input type="file" name="file" id="file" required />
-        <button type="submit">Upload</button>
-    </form>
+
+    <!-- New Textarea to Copy/Paste Tweets -->
+    <h3>Paste Tweets Below</h3>
+    <textarea
+      id="tweetsTextarea"
+      rows="20"
+      cols="100"
+      placeholder="Paste your tweets here..."
+    ></textarea
+    ><br /><br />
+    <button id="uploadButton">Upload Tweets</button>
 
     <h3 id="status"></h3>
-    
+
     <script>
-        document.getElementById('uploadForm').addEventListener('submit', async (event) => {
-            event.preventDefault();
+      document
+        .getElementById("uploadButton")
+        .addEventListener("click", async () => {
+          const statusElement = document.getElementById("status");
+          statusElement.textContent = "Processing file...";
 
-            const statusElement = document.getElementById('status');
-            statusElement.textContent = 'Processing file...';
+          const tweetsText = document.getElementById("tweetsTextarea").value;
+          if (!tweetsText.trim()) {
+            statusElement.textContent = "Error: No tweets entered.";
+            return;
+          }
 
-            const formData = new FormData();
-            formData.append('file', document.getElementById('file').files[0]);
+          // Create a Blob from the text and simulate a file upload
+          const file = new Blob([tweetsText], { type: "text/plain" });
+          const formData = new FormData();
+          formData.append("file", file, "tweets.txt"); // Set filename to 'tweets.txt'
 
-            try {
-                const response = await fetch('/upload', {
-                    method: 'POST',
-                    body: formData,
-                });
+          try {
+            const response = await fetch("/upload", {
+              method: "POST",
+              body: formData,
+            });
 
-                const result = await response.json();
-                if (result.success) {
-                    statusElement.textContent = 'File uploaded and processed successfully!';
-                } else {
-                    statusElement.textContent = `Error: ${result.message}`;
-                }
-            } catch (error) {
-                statusElement.textContent = `Error: ${error.message}`;
+            const result = await response.json();
+            if (result.success) {
+              statusElement.textContent =
+                "File uploaded and processed successfully!";
+            } else {
+              statusElement.textContent = `Error: ${result.message}`;
             }
+          } catch (error) {
+            statusElement.textContent = `Error: ${error.message}`;
+          }
         });
     </script>
-</body>
+  </body>
 </html>
